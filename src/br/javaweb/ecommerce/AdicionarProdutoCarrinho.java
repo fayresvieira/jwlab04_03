@@ -56,7 +56,6 @@ public class AdicionarProdutoCarrinho extends HttpServlet {
             throw new ServletException(e);
         }
         
-        
 
         // Impressao dos dados do produto
         out.println("<br/>id: <strong>" + prod.getId() + "</strong>");

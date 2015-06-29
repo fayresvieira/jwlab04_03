@@ -1,6 +1,6 @@
 /*
 
-Classe catalogoProdutosView - Gera um arquivo HTML com informações obtidas através do servlet e repassa a classe
+Classe catalogoProdutosView - Gera um arquivo HTML com informações obtidas através de DAO e repassa a classe
 AdicionarProdutoCarrinho o Id para tratamento.
 
 fabricio.ayres@gmail.com  - Fabrício Ayres Vieira
@@ -12,12 +12,7 @@ package br.javaweb.ecommerce;
 import br.javaweb.beans.Produto;
 import br.javaweb.dao.ProdutoDAO;
 import br.javaweb.dao.ProdutoDAOImpl;
-import br.javaweb.util.JavaWebException;
 import java.io.*;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -70,8 +65,8 @@ public class CatalogoProdutosView extends HttpServlet
     
         List<Produto> produtos = null;
         produtos = (List<Produto>) request.getAttribute("catalog");
+      
 
-        
         for (Produto prod : produtos)
             
         {
@@ -82,7 +77,7 @@ public class CatalogoProdutosView extends HttpServlet
         out.println("<TD width = '%10' class='gridCampo'>" + prod.getCodigo() + "</TD>");
         out.println("<TD width = '%10'  class='gridCampo'>" + prod.getDescricao() +"</TD>");
         out.println("<TD width = '%10' class='gridCampo'>" + prod.getPreco() + "</TD>");
-        out.println("<TD width = '%20' colspan = '2'><A HREF= 'adicionarProdutoCarrinho?idProduto=" + prod.getId() + ")' ><IMG SRC = 'imagem/carrinho.gif'/></A></TD>");
+        out.println("<TD width = '%20' colspan = '2'><A HREF= 'adicionarProdutoCarrinho?idProduto=" + prod.getId() + "'><IMG SRC = 'imagem/carrinho.gif'/></A></TD>");
         out.println("</TR>");
         
         }

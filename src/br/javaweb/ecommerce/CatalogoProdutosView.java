@@ -49,11 +49,12 @@ public class CatalogoProdutosView extends HttpServlet
         
         //Obtendo parametros do request
         
+        
         ProdutoDAO prd = new ProdutoDAOImpl();
         List listaProdutos = null;
         try {
             listaProdutos = prd.getCatalogoProdutos();
-
+            
             request.setAttribute("catalog", listaProdutos);
           
         } catch (Exception e) {

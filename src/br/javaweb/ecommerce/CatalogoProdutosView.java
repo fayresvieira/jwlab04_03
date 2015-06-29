@@ -53,25 +53,31 @@ public class CatalogoProdutosView extends HttpServlet
         out.println("</TR>");
         
         //Obtendo parametros do request
-     
         
-        Produto prod = null;
-        ProdutoDAO dao = new ProdutoDAOImpl();
-        
-         try {    
-             
-         dao.getCatalogoProdutos();
-         
-         
+        ProdutoDAO prd = new ProdutoDAOImpl();
+        List listaProdutos = null;
+        try {
+            listaProdutos = prd.getCatalogoProdutos();
+
+            request.setAttribute("catalog", listaProdutos);
+          
         } catch (Exception e) {
-            throw new ServletException(e);
+            
+            String mensagem="Catalogo não disponível";
+            
+            throw new ServletException();
         }
+    
+        List<Produto> produtos = null;
+        produtos = (List<Produto>) request.getAttribute("catalog");
+
         
-        // Produtos
-         
-              
+        for (Produto prod : produtos)
+            
+        {
+                
         out.println("<TR width = '%100'>");
-        out.println("<TD width = '%20'>" + prod.getImage() +"</TD>");
+        out.println("<TD width = '%10'><IMG SRC = 'imagem/"+prod.getImage()+"'</TD>");
         out.println("<TD width = '%10'  class='gridCampo'>" + prod.getNome() +"</TD>");
         out.println("<TD width = '%10' class='gridCampo'>" + prod.getCodigo() + "</TD>");
         out.println("<TD width = '%10'  class='gridCampo'>" + prod.getDescricao() +"</TD>");
@@ -79,6 +85,7 @@ public class CatalogoProdutosView extends HttpServlet
         out.println("<TD width = '%20' colspan = '2'><A HREF= 'adicionarProdutoCarrinho?idProduto=" + prod.getId() + ")' ><IMG SRC = 'imagem/carrinho.gif'/></A></TD>");
         out.println("</TR>");
         
+        }
         
         // final da tabela de produtos
         out.println("</TABLE>");
